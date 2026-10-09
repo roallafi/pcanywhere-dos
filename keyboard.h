@@ -13,6 +13,7 @@ private:
     int buffer_head;
     int buffer_tail;
     int is_installed;
+    void interrupt (*old_handler)(...);
 
 public:
     KeyboardCapture();

@@ -1,11 +1,9 @@
-# Makefile for Borland C++ 4.0 DOS project
+# Makefile for Borland C++ 4.0 / Turbo C++ 4.0 DOS project
 
 CC = bcc
 CFLAGS = -c -O -w-
 LIBS = math.lib
-
 OBJS = pcanywhere.obj serial.obj protocol.obj keyboard.obj screen.obj display.obj
-
 PROGRAM = pcanywhere.exe
 
 all: $(PROGRAM)

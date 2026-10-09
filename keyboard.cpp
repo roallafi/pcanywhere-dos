@@ -24,6 +24,7 @@ KeyboardCapture::KeyboardCapture() {
     buffer_head = 0;
     buffer_tail = 0;
     is_installed = 0;
+    old_handler = NULL;
 }
 
 KeyboardCapture::~KeyboardCapture() {
@@ -32,13 +33,19 @@ KeyboardCapture::~KeyboardCapture() {
 
 void KeyboardCapture::install() {
     if (is_installed) return;
+
+    old_handler = getvect(KEYBOARD_INT);
     setvect(KEYBOARD_INT, keyboard_isr);
     is_installed = 1;
 }
 
 void KeyboardCapture::uninstall() {
     if (!is_installed) return;
-    setvect(KEYBOARD_INT, getvect(KEYBOARD_INT));
+
+    if (old_handler != NULL) {
+        setvect(KEYBOARD_INT, old_handler);
+    }
+
     is_installed = 0;
 }
 
